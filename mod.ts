@@ -30,7 +30,7 @@ startBot({
       if(message.author.bot){
         return;
       }
-  
+      console.log(message.content);
       const actions = [
         {
           word: "^みー$",
