@@ -1,12 +1,17 @@
 import { startBot, botID } from "https://deno.land/x/discordeno/mod.ts";
 import { connect } from "https://deno.land/x/redis/mod.ts";
-import { configs } from "./configs.ts";
 import { messages } from "./messages.ts";
 
+const {
+  BOT_TOKEN,
+  REDIS_HOST,
+  REDIS_PASS
+} = Deno.env.toObject();
+
 const redis = await connect({
-  hostname: configs.redisHost,
+  hostname: REDIS_HOST,
   port: 19147,
-  password: configs.redisPass
+  password: REDIS_PASS
 });
 
 function random(min: number, max: number) {
@@ -14,7 +19,7 @@ function random(min: number, max: number) {
 }
 
 startBot({
-  token: "BOT TOKEN",
+  token: BOT_TOKEN,
   intents: ["GUILDS", "GUILD_MESSAGES"],
   eventHandlers: {
     ready() {
